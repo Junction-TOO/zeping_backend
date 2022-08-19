@@ -3,7 +3,11 @@
     include 'common.php';
     $userName = $_GET['userName'];
     if($userName == ''){
-        error('Need Parameter: userName');
+        error('Need Parameter: userName', 'setGPS');
+    }
+    $phoneNumber = $_GET['phoneNumber'];
+    if($phoneNumber == ''){
+        error('Need Parameter: phoneNumber', 'setGPS');
     }
     function getNumber(){
         $usId = mt_rand(1111111, 9999999);
@@ -14,17 +18,19 @@
         else return $usId;
     }
     $userId = getNumber();
-    $sql = 'INSERT INTO gps VALUES('.$userId.', "'.$userName.'", "", "")';
-    $res = DB_res($sql);
 
-    if(!$res) error("DB Insert Error");
-    $echo = array(
-        "success" => true,
-        "message" => "success",
-        "data" => array(
-            "userName" => $userName,
-            "userId" => $userId
-        )
-    );
-    echo json_encode($echo);
+    $noneGPS = json_encode(array(
+       "latitude" => "",
+       "longitude" => ""
+    ));
+
+    $sql = "INSERT INTO gps VALUES(".$userId.", '".$userName."', '".$phoneNumber."', '".$noneGPS."', '".$noneGPS."')";
+    
+    $DB = DB_res($sql);
+    if($DB){
+        success($userId, 'makeUser');
+    }
+    else{
+        error("DB Insert Error", 'setGPS');
+    }
 ?>
