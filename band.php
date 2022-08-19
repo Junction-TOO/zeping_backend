@@ -6,11 +6,11 @@ $type = $_GET['type'];
 /*
 type:
     - add: 밴드 추가
-        추가 할 밴드의 bandId(밴드 고유번호) 피라미터로 넘겨주기
+        bandId(밴드 고유번호)
     - del: 밴드 제거 
-        제거 할 밴드의 bandId(밴드 고유번호) 피라미터로 넘겨주기
+        bandId(밴드 고유번호)
     - get: 정보 가져오기
-        bandId(밴드 고유번호)로 정보 조회 또는 userId(사용자 토큰)로 정보 조회
+        bandId(밴드 고유번호) 또는 userId(사용자 토큰)
 */
 
 if($type == 'add'){
