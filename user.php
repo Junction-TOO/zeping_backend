@@ -1,7 +1,6 @@
 <?php
 header("Content-Type: application/json");
 include 'common.php';
-
 $type = $_GET['type'];
 /*
 type:
@@ -40,14 +39,15 @@ if($type == 'add'){
     }
 
     $userId = getNumber();
-    $sql = "UPDATE gps SET userId='".$userId."', userName='".$userName."', phoneNumber='".$phoneNumber."', cGPS=NULL, pGPS=NULL WHERE bandId='".$bandId."'";
+    $sql = "UPDATE gps SET userId='".$userId."', userName='".$userName."', phoneNumber='".$phoneNumber."', cGPS=NULL, pGPS=NULL, losted=0 WHERE bandId='".$bandId."'";
     $DB = DB_res($sql);
     if($DB){
         $echo = array(
             "success" => true,
             "message" => "사용자 정보 등록 완료!",
             "data" => array(
-                "userId" => $userId
+                "userId" => $userId,
+                "url" => 'https://zep.us/play/2p1am6?customData=["'.$userId.'"]'
             )
         );
         echo json_encode($echo);
@@ -64,7 +64,7 @@ else if($type == 'del'){
         $DB = DB($sql);
         if(!mysqli_num_rows($DB)) error("등록 된 밴드가 아닙니다.", 'user');
     
-        $sql = "UPDATE gps SET userId=NULL, userName=NULL, phoneNumber=NULL, cGPS=NULL, pGPS=NULL WHERE bandId='".$bandId."'";
+        $sql = "UPDATE gps SET userId=NULL, userName=NULL, phoneNumber=NULL, cGPS=NULL, pGPS=NULL, losted=0 WHERE bandId='".$bandId."'";
         $DB = DB_res($sql);
         if($DB){
             $echo = array(
@@ -82,7 +82,7 @@ else if($type == 'del'){
         $DB = DB($sql);
         if(!mysqli_num_rows($DB)) error("등록 된 사용자가 아닙니다.", 'user');
     
-        $sql = "UPDATE gps SET userId=NULL, userName=NULL, phoneNumber=NULL, cGPS=NULL, pGPS=NULL WHERE userId='".$userId."'";
+        $sql = "UPDATE gps SET userId=NULL, userName=NULL, phoneNumber=NULL, cGPS=NULL, pGPS=NULL, losted=0 WHERE userId='".$userId."'";
         $DB = DB_res($sql);
         if($DB){
             $echo = array(

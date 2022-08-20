@@ -20,7 +20,7 @@ if($type == 'add'){
     $DB = DB($sql);
     if(mysqli_num_rows($DB)) error("이미 등록되어 있는 밴드입니다.", 'band');
 
-    $sql = "INSERT INTO gps Values('".$bandId."', NULL, NULL, NULL, NULL, NULL)";
+    $sql = "INSERT INTO gps Values('".$bandId."', NULL, NULL, NULL, NULL, NULL, 0)";
     $DB = DB_res($sql);
     if($DB){
         $echo = array(
@@ -81,7 +81,9 @@ else if($type == 'get'){
             "userName" => $row[2],
             "phoneNumber" => $row[3],
             "cGPS" => $cGPS,
-            "pGPS" => $pGPS
+            "pGPS" => $pGPS,
+            "losted" => boolval($row[6]),
+            "url" => 'https://zep.us/play/2p1am6?customData=["'.$row[1].'"]'
         ));
     }
     $echo = array(
