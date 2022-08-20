@@ -45,7 +45,10 @@ if($type == 'add'){
     if($DB){
         $echo = array(
             "success" => true,
-            "message" => "사용자 정보 등록 완료!"
+            "message" => "사용자 정보 등록 완료!",
+            "data" => array(
+                "userId" => $userId
+            )
         );
         echo json_encode($echo);
     }
@@ -96,7 +99,5 @@ else if($type == 'del'){
 else{
     error('Wrong Parameter: type', 'user');
 }
-
-
 
 ?>
