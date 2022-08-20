@@ -55,22 +55,42 @@ if($type == 'add'){
 }
 else if($type == 'del'){
     $bandId = $_GET['bandId'];
-    if($bandId == '') error('Need Parameter: bandId', 'user');
-    $sql = "SELECT * FROM gps WHERE bandId='".$bandId."'";
-    $DB = DB($sql);
-    if(!mysqli_num_rows($DB)) error("등록 된 밴드가 아닙니다.", 'user');
-
-    $sql = "UPDATE gps SET userId=NULL, userName=NULL, phoneNumber=NULL, cGPS=NULL, pGPS=NULL WHERE bandId='".$bandId."'";
-    $DB = DB_res($sql);
-    if($DB){
-        $echo = array(
-            "success" => true,
-            "message" => "사용자 정보 삭제 완료!"
-        );
-        echo json_encode($echo);
+    $userId = $_GET['userId'];
+    if($bandId != ''){
+        $sql = "SELECT * FROM gps WHERE bandId='".$bandId."'";
+        $DB = DB($sql);
+        if(!mysqli_num_rows($DB)) error("등록 된 밴드가 아닙니다.", 'user');
+    
+        $sql = "UPDATE gps SET userId=NULL, userName=NULL, phoneNumber=NULL, cGPS=NULL, pGPS=NULL WHERE bandId='".$bandId."'";
+        $DB = DB_res($sql);
+        if($DB){
+            $echo = array(
+                "success" => true,
+                "message" => "사용자 정보 삭제 완료!"
+            );
+            echo json_encode($echo);
+        }
+        else{
+            error("DB Update Error", 'user');
+        }
     }
-    else{
-        error("DB Update Error", 'user');
+    else if($userId != ''){
+        $sql = "SELECT * FROM gps WHERE userId='".$userId."'";
+        $DB = DB($sql);
+        if(!mysqli_num_rows($DB)) error("등록 된 사용자가 아닙니다.", 'user');
+    
+        $sql = "UPDATE gps SET userId=NULL, userName=NULL, phoneNumber=NULL, cGPS=NULL, pGPS=NULL WHERE userId='".$userId."'";
+        $DB = DB_res($sql);
+        if($DB){
+            $echo = array(
+                "success" => true,
+                "message" => "사용자 정보 삭제 완료!"
+            );
+            echo json_encode($echo);
+        }
+        else{
+            error("DB Update Error", 'user');
+        }
     }
 }
 else{

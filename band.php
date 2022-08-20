@@ -71,8 +71,8 @@ else if($type == 'get'){
     $db = DB($rep);
     $data = array();
     while($row = mysqli_fetch_row($db)){
-        $cGPS = json_encode($row[4]);
-        $pGPS = json_encode($row[5]);
+        $cGPS = json_decode($row[4]);
+        $pGPS = json_decode($row[5]);
         if($cGPS == 'null') $cGPS = NULL;
         if($pGPS == 'null') $pGPS = NULL;
         array_push($data, array(
