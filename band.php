@@ -83,7 +83,7 @@ else if($type == 'get'){
             "cGPS" => $cGPS,
             "pGPS" => $pGPS,
             "losted" => boolval($row[6]),
-            "url" => 'https://zep.us/play/2p1am6?customData=["'.$row[1].'"]'
+            "url" => 'https://zep.us/play/yxWxlb?customData=["'.$row[1].'"]'
         ));
     }
     $echo = array(

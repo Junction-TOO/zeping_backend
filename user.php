@@ -47,7 +47,7 @@ if($type == 'add'){
             "message" => "사용자 정보 등록 완료!",
             "data" => array(
                 "userId" => $userId,
-                "url" => 'https://zep.us/play/2p1am6?customData=["'.$userId.'"]'
+                "url" => 'https://zep.us/play/yxWxlb?customData=["'.$userId.'"]'
             )
         );
         echo json_encode($echo);
